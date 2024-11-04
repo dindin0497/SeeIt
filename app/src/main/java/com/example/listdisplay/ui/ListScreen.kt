@@ -1,5 +1,6 @@
 package com.example.listdisplay.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,9 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
@@ -25,14 +29,22 @@ import com.example.listdisplay.data.Result
 import com.example.listdisplay.data.model.AnimData
 import com.example.listdisplay.data.source.local.MyData
 
+const val TAG="EFFECT"
+
 @Composable
 fun ListScreen(state: Result<List<MyData>>) {
+
     Box(modifier = Modifier.fillMaxSize()){
         when (state) {
             is Result.Loading -> {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
             is Result.Success -> {
+                // This will run after recomposition
+                SideEffect {
+                    Log.d(TAG, "SideEffect")
+                }
+
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(2), // Display 2 items per row
                     contentPadding = PaddingValues(8.dp),
@@ -51,6 +63,15 @@ fun ListScreen(state: Result<List<MyData>>) {
             is Result.Error -> {
                 Text(text = "Error: ${state.message}")
             }
+        }
+    }
+
+    // 4. Using DisposableEffect to clean up resources when the composable leaves the composition
+    DisposableEffect(Unit) {
+        Log.d(TAG,"Screen entered composition")
+        onDispose {
+            Log.d(TAG,"Screen left composition - cleanup performed")
+            // Perform cleanup operations, such as removing listeners or canceling coroutines
         }
     }
 }

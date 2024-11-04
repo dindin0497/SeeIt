@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.material3.Text
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -82,6 +83,15 @@ fun SearchScreen(viewModel: MainViewModel = hiltViewModel() ){
     val state by viewModel.searchState.collectAsState()
     var inputText by remember { mutableStateOf(text) }
 
+    // Use LaunchedEffect to perform the search with a delay to debounce
+    LaunchedEffect(inputText) {
+        // Add a short delay to debounce the search (e.g., 500 milliseconds)
+        kotlinx.coroutines.delay(500)
+        if (inputText.isNotEmpty()) {
+            viewModel.search(inputText)
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -110,6 +120,5 @@ fun SearchScreen(viewModel: MainViewModel = hiltViewModel() ){
             ListScreen(state)
         }
     }
-
 }
 
