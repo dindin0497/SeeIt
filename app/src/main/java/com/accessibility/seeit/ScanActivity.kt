@@ -27,11 +27,10 @@ import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.objects.ObjectDetection
 import com.google.mlkit.vision.objects.ObjectDetector
 import com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions
-import com.seeit.seeit.databinding.ActivityMainBinding
 import java.util.Locale
 import android.net.Uri
 import android.provider.Settings
-import com.seeit.seeit.R
+import com.accessibility.seeit.databinding.ActivityMainBinding
 
 
 class ScanActivity : AppCompatActivity() {

@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.seeit.seeit'
+    namespace 'com.accessibility.seeit'
     compileSdk 36
 
     defaultConfig {
-        applicationId "com.example.seeit"
+        applicationId "com.accessibility.seeit"
         minSdk 27
         targetSdk 36
         versionCode 1
