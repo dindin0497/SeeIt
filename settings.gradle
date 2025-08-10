@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ListDisplay"
+rootProject.name = "SeeIt"
 include ':app'
