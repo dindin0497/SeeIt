@@ -20,7 +20,7 @@
         android:theme="@style/Theme.SeeIt">
 
         <activity
-            android:name="com.seeit.seeit.ScanActivity"
+            android:name=".ScanActivity"
             android:exported="true">
 
             <intent-filter>

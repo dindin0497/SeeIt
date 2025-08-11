@@ -206,7 +206,6 @@ class ScanActivity : AppCompatActivity() {
     private fun outputdata(data: String) {
         if (!OutputGate.shouldEmit(data))
             return
-        Toast.makeText(applicationContext,data.toString(), Toast.LENGTH_LONG).show()
         speak("Object is $data")
     }
 
