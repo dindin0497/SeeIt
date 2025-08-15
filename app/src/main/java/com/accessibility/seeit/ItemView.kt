@@ -10,8 +10,6 @@ import android.view.View
 
 class ItemView(conext: Context?, var rect: Rect, var text:String): View(conext) {
 
-    private val textToSpeech: TextToSpeech? = null
-
     lateinit var paint: Paint
     lateinit var textPaint: Paint
 
