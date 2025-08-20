@@ -18,7 +18,7 @@ Inclusive Android app with two core capabilities:
 - 🤟 Many Deaf and Hard of Hearing (HoH) individuals **use ASL as their primary language**, not written/spoken English.  
 - 🗣️ This feature bridges the gap by **translating spoken words into sign language videos**, enabling more natural understanding.  
 - 🧑‍🤝‍🧑 It promotes **inclusion** in everyday scenarios such as conversations, announcements, and meetings.  
-- 🌍 Designed with accessibility in mind: large buttons, high contrast, and customizable modes (**ASL only**, **TTS only**, or **both**).  
+- 🌍 Designed with accessibility in mind: large buttons, high contrast, and customizable modes.  
 
 ### Key Features  
 - ⚡ Partial results (near word-by-word feel)  
