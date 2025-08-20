@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SeeIt</string>
+    <string name="asl_entry_title" translatable="false">Run the ASL demo</string>
+    <string name="scan_entry_title" translatable="false">Run the Scan object demo</string>
 </resources>

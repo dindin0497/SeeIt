@@ -1,4 +1,4 @@
-package com.accessibility.seeit
+package com.accessibility.seeit.scan
 
 import android.os.SystemClock
 

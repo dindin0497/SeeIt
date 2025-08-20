@@ -19,6 +19,10 @@ android {
     }
 
     buildTypes {
+        debug  {
+            minifyEnabled false
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -32,7 +36,8 @@ android {
         jvmTarget = '11'
     }
     aaptOptions {
-        noCompress "tflite" // To avoid ML model compression
+        noCompress "tflite"
+        noCompress "bin"
     }
     dataBinding {
         enabled = true // To enable data binding
@@ -40,6 +45,7 @@ android {
     buildFeatures {
         compose true
     }
+
 }
 
 dependencies {
@@ -56,6 +62,7 @@ dependencies {
     implementation libs.androidx.ui.graphics
     implementation libs.androidx.ui.tooling.preview
     implementation libs.androidx.material3
+    implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
@@ -63,10 +70,41 @@ dependencies {
     androidTestImplementation libs.androidx.ui.test.junit4
     debugImplementation libs.androidx.ui.tooling
     debugImplementation libs.androidx.ui.test.manifest
+
+
+    implementation("androidx.media3:media3-exoplayer:1.8.0")
+    implementation("androidx.media3:media3-exoplayer-dash:1.8.0")
+    implementation("androidx.media3:media3-ui:1.8.0")
+    implementation("androidx.media3:media3-ui-compose:1.8.0")
     
     implementation 'com.google.mlkit:object-detection-custom:17.0.0'
 
     implementation "androidx.camera:camera-camera2:1.2.0-rc01"
     implementation "androidx.camera:camera-lifecycle:1.2.0-rc01"
     implementation "androidx.camera:camera-view:1.2.0-rc01"
+
+    implementation("org.apache.opennlp:opennlp-tools:1.9.4")
+    implementation 'edu.stanford.nlp:stanford-parser:3.6.0'
+
+    implementation('net.sf.extjwnl:extjwnl:1.9.1') {
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+        exclude group: 'log4j', module: 'log4j'
+    }
+
+    implementation 'org.jsoup:jsoup:1.11.3'
+
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+    implementation "net.sf.kxml:kxml2:2.3.0"
+    implementation "org.apache.opennlp:opennlp-tools:1.9.4"   
+
+}
+
+configurations.all {
+    exclude group: 'com.intellij', module: 'annotations'
+    resolutionStrategy {
+        force 'org.jetbrains:annotations:23.0.0'
+    }
 }

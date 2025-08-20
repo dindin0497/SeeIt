@@ -1,11 +1,10 @@
-package com.accessibility.seeit
+package com.accessibility.seeit.scan
 
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
-import android.speech.tts.TextToSpeech
 import android.view.View
 
 class ItemView(conext: Context?, var rect: Rect, var text:String): View(conext) {

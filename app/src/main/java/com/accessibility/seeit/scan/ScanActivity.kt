@@ -1,4 +1,4 @@
-package com.accessibility.seeit
+package com.accessibility.seeit.scan
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.util.Size
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -30,7 +29,10 @@ import com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions
 import java.util.Locale
 import android.net.Uri
 import android.provider.Settings
+import androidx.camera.core.Preview
+import com.accessibility.seeit.R
 import com.accessibility.seeit.databinding.ActivityMainBinding
+import java.util.concurrent.Executors
 
 
 class ScanActivity : AppCompatActivity() {
@@ -47,7 +49,7 @@ class ScanActivity : AppCompatActivity() {
     private lateinit var cameraProviderFuture : ListenableFuture<ProcessCameraProvider>
 
 
-    private val executor = java.util.concurrent.Executors.newSingleThreadExecutor()
+    private val executor = Executors.newSingleThreadExecutor()
 
 
 
@@ -58,9 +60,6 @@ class ScanActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-
-
-        ensureCameraPermissionAndStart()
 
         val localModel = LocalModel.Builder()
             .setAssetFilePath("object_detection.tflite")
@@ -85,6 +84,8 @@ class ScanActivity : AppCompatActivity() {
         }
 
         objectDetector = ObjectDetection.getClient(customObjectDetectorOptions)
+
+        startCamera()
     }
 
     private fun startCamera() {
@@ -98,59 +99,12 @@ class ScanActivity : AppCompatActivity() {
         }, ContextCompat.getMainExecutor(this))
     }
 
-    private val requestCameraPermission =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-            if (granted) {
-                startCamera()
-            } else {
-                // If user checked “Don’t ask again”, show Settings
-                val permanentlyDenied =
-                    !shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)
-                if (permanentlyDenied) {
-                    AlertDialog.Builder(this)
-                        .setTitle("Camera permission needed")
-                        .setMessage("Please enable Camera permission in Settings to continue.")
-                        .setPositiveButton("Open Settings") { _, _ ->
-                            val intent = Intent(
-                                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                                Uri.fromParts("package", packageName, null)
-                            )
-                            startActivity(intent)
-                        }
-                        .setNegativeButton("Cancel", null)
-                        .show()
-                } else {
-                    // User just denied. You could show a rationale or retry later.
-                }
-            }
-        }
-
-    private fun ensureCameraPermissionAndStart() {
-        val hasPermission = ContextCompat.checkSelfPermission(
-            this, Manifest.permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
-
-        if (hasPermission) {
-            startCamera()
-        } else if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
-            AlertDialog.Builder(this)
-                .setTitle("Camera permission")
-                .setMessage("We need access to your camera to capture images.")
-                .setPositiveButton("Allow") { _, _ ->
-                    requestCameraPermission.launch(Manifest.permission.CAMERA)
-                }
-                .setNegativeButton("Not now", null)
-                .show()
-        } else {
-            requestCameraPermission.launch(Manifest.permission.CAMERA)
-        }
-    }
 
     @SuppressLint("UnsafeOptInUsageError", "SuspiciousIndentation")
     @RequiresApi(Build.VERSION_CODES.R)
     private fun bindpreview(cameraProvider: ProcessCameraProvider)
     {
-        val preview : androidx.camera.core.Preview = androidx.camera.core.Preview.Builder().build()
+        val preview : Preview = Preview.Builder().build()
         preview.setSurfaceProvider(binding.previewView.surfaceProvider)
 
         val cameraSelector : CameraSelector = CameraSelector.Builder()
