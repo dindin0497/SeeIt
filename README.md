@@ -34,7 +34,14 @@ https://github.com/user-attachments/assets/c31b4838-6ffb-413a-a6cd-38d3aea3a1af
 ### What It Does  
 - 📷 Uses **camera** to detect objects in real time  
 - 🗣️ Speaks object names via **Text-to-Speech (TTS)**  
-- 🏷️ Optionally shows detected labels on screen  
+- 🏷️ Optionally shows detected labels on screen
+
+### Why It Matters for People with Visual Impairments  
+- 👓 Helps users with **eye problems or low vision** identify objects in their surroundings.  
+- 🗣️ Provides **audio feedback** so users can hear what’s in front of them without needing to see it.  
+- 🧭 Improves independence by enabling safer navigation and better awareness of the environment.  
+- 🖼️ Optional on-screen labels can support users with **partial vision**, combining text with speech.  
+
 
 ### Key Features  
 - ⚡ Real-time detection (CameraX + ML Kit/TFLite)  
