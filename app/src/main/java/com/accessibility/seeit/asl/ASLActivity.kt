@@ -144,7 +144,6 @@ class ASLActivity : AppCompatActivity() {
                 )
             )
 
-        // 2) Build player with a MediaSourceFactory that uses our data source
         player = ExoPlayer.Builder(this)
             .setMediaSourceFactory(DefaultMediaSourceFactory(httpFactory))
             .build()
