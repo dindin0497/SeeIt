@@ -9,17 +9,13 @@ public class ASLResponse {
 	private EnglishTagResponse englishTagResponse;
 	private EnglishGrammarCheckResponse englishGrammarCheckResponse;
 
-	public String getSentence() {
-		return sentence;
-	}
+
 
 	public void setSentence(String sentence) {
 		this.sentence = sentence;
 	}
 
-	public EnglishTagResponse getEnglishTagResponse() {
-		return englishTagResponse;
-	}
+
 
 	public void setEnglishTagResponse(EnglishTagResponse englishTagResponse) {
 		this.englishTagResponse = englishTagResponse;
