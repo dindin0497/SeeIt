@@ -176,8 +176,6 @@ class ASLActivity : AppCompatActivity() {
             }
         })
 
-        // player.repeatMode = Player.REPEAT_MODE_ALL
-
     }
 
     override fun onStop() {
