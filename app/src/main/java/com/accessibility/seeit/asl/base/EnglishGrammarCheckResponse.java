@@ -21,10 +21,6 @@ public class EnglishGrammarCheckResponse {
 		this.sentence = sentence;
 	}
 
-	public Map<String, String> getSuggestions() {
-		return suggestions;
-	}
-
 	public void setSuggestions(Map<String, String> inSuggestions) {
 		this.suggestions = inSuggestions;
 	}
