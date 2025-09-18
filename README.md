@@ -23,7 +23,6 @@ Inclusive Android app with two core capabilities:
 ### Key Features  
 - ⚡ Partial results (near word-by-word feel)  
 - 🎯 Candidate ranking (choose the best sign/video)  
-- 🔄 Caching + retry/backoff to reduce lag  
 
 ### Demo  
 
